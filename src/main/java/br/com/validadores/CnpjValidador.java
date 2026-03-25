@@ -7,20 +7,21 @@ public class CnpjValidador extends ValidadorDigitoVerificadorAbstract {
 		cnpj = normatizadorCnpj(cnpj);
 
 		if (isNullOrEmpty(cnpj)) {
+			System.out.println("nulo ou vazio");
 			return false;
 		}
 
-		if (validaQuantidadeCaracteresCnpj(cnpj)) {
+		if (!validaQuantidadeCaracteresCnpj(cnpj)) {
 			return false;
 		}
 
-		if (!verificaDigitosRepetidos(cnpj)) {
+		if (!verificaDigitosRepetidosCnpj(cnpj)) {
 			return false;
 		}
 
 		if (calculaPrimeiroDigitoCnpj(cnpj)) {
-			if (calculaSegundoDigitoCnpj(cnpj)) {
-				return true;
+			if (!calculaSegundoDigitoCnpj(cnpj)) {
+				return false;
 			}
 		}
 

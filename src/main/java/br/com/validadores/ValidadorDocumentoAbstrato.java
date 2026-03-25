@@ -17,12 +17,19 @@ public abstract class ValidadorDocumentoAbstrato implements ValidadorDigitoVerif
 	protected boolean validaQuantidadeCaracteresCnpj(String cnpj) {
 		// valida se tem 14 digitos
 		if (cnpj.length() != 14) {
+			System.out.println("cnpj com "+ cnpj.length()+" ta errado");
+			return false;
+		}
+		return true;
+	}
+	protected boolean validaQuantidadeCaracteresCpf(String cpf) {
+		if (cpf.length() != 11) {
 			return false;
 		}
 		return true;
 	}
 
-	protected static boolean verificaDigitosRepetidos(String cnpj) {
+	protected static boolean verificaDigitosRepetidosCnpj(String cnpj) {
 		char primeiroDigito = cnpj.charAt(0);
 		for (int i = 1; i < cnpj.length(); i++) {
 			if (cnpj.charAt(i) != primeiroDigito) {
@@ -30,6 +37,18 @@ public abstract class ValidadorDocumentoAbstrato implements ValidadorDigitoVerif
 			}
 		}
 		return false; // todos iguais
+	}
+	
+	protected boolean verificaDigitosRepetidosCpf(String cpf) {
+		char primeiroDigito = cpf.charAt(0);
+
+		for (int i = 1; i < cpf.length(); i++) {
+			if (cpf.charAt(i) != primeiroDigito) {
+				return true; // retorna que nao tem digito igual
+			}
+		}
+		return false; // achou todos iguais
+
 	}
 
 	protected static int converteCaractere(char c) {
